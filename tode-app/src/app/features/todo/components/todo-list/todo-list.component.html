@@ -1,0 +1,127 @@
+<div class="container mx-auto w-full my-20">
+  <h1 class="text-2xl font-bold mb-4">Todo List</h1>
+  <div class="flex justify-end mb-4">
+    <a
+      routerLink="/todos/add"
+      class="bg-blue-500 text-white px-4 py-2 rounded decoration-none"
+      >Add Todo</a
+    >
+  </div>
+
+  <div class="flex gap-20 mt-10">
+    <input
+      [(ngModel)]="searchText"
+      type="text"
+      placeholder="Search By Title"
+      class="px-3 py-2 rounded-md text-sm w-full border-gray-300 focus:border-blue-500 dark:border-gray-600 dark:text-gray-400"
+    />
+    <button
+      (click)="search()"
+      class="font-medium text-white dark:text-blue-500 hover:underline bg-blue-500 py-1 px-6"
+    >
+     Search
+    </button>
+  </div>
+
+  <div class="flex my-10 gap-14">
+    <div>
+      <label>Start Date</label>
+      <input
+        [(ngModel)]="startDate"
+        type="date"
+        placeholder="Start Date"
+        class="px-3 py-2 rounded-md text-sm w-full border-gray-300 focus:border-blue-500 dark:border-gray-600 dark:text-gray-400"
+      />
+    </div>
+
+    <div>
+      <label>End Date</label>
+      <input
+        [(ngModel)]="endDate"
+        type="date"
+        placeholder="End Date"
+        class="px-3 py-2 rounded-md text-sm w-full border-gray-300 focus:border-blue-500 dark:border-gray-600 dark:text-gray-400"
+      />
+    </div>
+
+    <div>
+      <label>Category</label>
+      <select
+        [(ngModel)]="category"
+        class="px-3 py-2 rounded-md text-sm w-full border-gray-300 focus:border-blue-500 dark:border-gray-600 dark:text-gray-400"
+      >
+        <option value="">All Categories</option>
+        <option value="Work">Work</option>
+        <option value="Personnal">Personnal</option>
+        <option value="Shopping">Shopping</option>
+      </select>
+    </div>
+
+    <button
+      (click)="applyFilters()"
+      class="font-medium text-white dark:text-blue-500 hover:underline bg-blue-500 h-11 mt-6 px-6"
+    >
+      Apply Filter
+    </button>
+  </div>
+  <!-- Start Table  -->
+
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-14">
+    <table
+      class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+    >
+      <thead
+        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+      >
+        <tr>
+          <th scope="col" class="px-6 py-3">#</th>
+          <th scope="col" class="px-6 py-3">Title</th>
+          <th scope="col" class="px-6 py-3">Start Date</th>
+          <th scope="col" class="px-6 py-3">End Date</th>
+          <th scope="col" class="px-6 py-3">Category</th>
+          <th scope="col" class="px-6 py-3">
+            <span class="sr-only">Actions</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let todo of filteredTodos; let i = index"
+          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+        >
+          <th
+            scope="row"
+            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          >
+            {{ i + 1 }}
+          </th>
+          <td class="px-6 py-4">
+            {{ todo.title }}
+          </td>
+          <td class="px-6 py-4">
+            {{ todo.startDate }}
+          </td>
+          <td class="px-6 py-4">
+            {{ todo.endDate }}
+          </td>
+          <td class="px-6 py-4">
+            {{ todo.category }}
+          </td>
+          <td class="px-6 py-4 text-right flex gap-5">
+            <a
+              (click)="navigateToEdit(todo.id)"
+              class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+              >Edit</a
+            >
+            <button
+              (click)="deleteTodo(todo.id)"
+              class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            >
+              delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
