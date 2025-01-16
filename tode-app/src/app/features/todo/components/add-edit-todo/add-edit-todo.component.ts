@@ -21,6 +21,7 @@ export class AddEditTodoComponent implements OnInit{
     dependsOn: []
   }
   isEdit = false
+   todos: ITodo[] = []
 
   constructor (
     private todoService: TodeoService,
@@ -32,6 +33,7 @@ export class AddEditTodoComponent implements OnInit{
 
 
   ngOnInit(): void {
+     this.todos = this.todoService.getTodos()
       const id = this.route.snapshot.paramMap.get('id')
       if (id) {
         this.isEdit = true
@@ -47,6 +49,7 @@ export class AddEditTodoComponent implements OnInit{
       this.todoService.editTodo(this.todo.id, this.todo)
     } else {
       this.todo.id = uuidv4()
+      console.log("Todddoo", this.todo)
       this.todoService.addTodo(this.todo)
     }
     this.router.navigate(['/todos'])

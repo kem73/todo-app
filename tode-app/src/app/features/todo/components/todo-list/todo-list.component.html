@@ -79,6 +79,7 @@
           <th scope="col" class="px-6 py-3">Start Date</th>
           <th scope="col" class="px-6 py-3">End Date</th>
           <th scope="col" class="px-6 py-3">Category</th>
+          <th scope="col" class="px-6 py-3">Depend On</th>
           <th scope="col" class="px-6 py-3">
             <span class="sr-only">Actions</span>
           </th>
@@ -106,6 +107,9 @@
           </td>
           <td class="px-6 py-4">
             {{ todo.category }}
+          </td>
+          <td class="px-6 py-4">
+            <p *ngFor="let dependOn of todo.dependsOn">{{dependOn}}</p>
           </td>
           <td class="px-6 py-4 text-right flex gap-5">
             <a

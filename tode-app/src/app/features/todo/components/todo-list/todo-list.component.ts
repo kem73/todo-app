@@ -17,6 +17,7 @@ export class TodoListComponent implements OnInit {
   endDate: string = '';
   category: string= ''
 
+
   // Search 
   private searchSubject: Subject<string> = new Subject<string>();
   private searchDebounced$ = this.searchSubject.pipe(
@@ -30,6 +31,8 @@ export class TodoListComponent implements OnInit {
   ngOnInit(): void {
      this.todos = this.todoService.getTodos() ||  []
      this.filteredTodos = [...this.todos];
+     console.log(this.todos)
+
     //  this.searchDebounced$.subscribe((filteredTodos: ITodo[]) => {
     //   this.filteredTodos = filteredTodos;
     // });
